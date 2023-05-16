@@ -1,0 +1,45 @@
+.navbar{
+    align-items: center;
+    display: grid;
+    grid-template-areas:
+        "navbar navbar actions"
+        "search search search";
+    grid-template-columns: repeat(3,1fr);
+    grid-template-rows: repeat(2,1fr);
+    min-height: 75px;
+}
+
+.navbar .navbar_heading{
+    grid-area: heading;
+    letter-spacing: .15em;
+    margin: 0;
+    padding-left: 5px;
+    text-align: start;
+}
+
+.navlink {
+    display: flex;
+    text-decoration: none;
+    color: #000;
+}
+
+h1 {
+    font-size: 1rem;
+}
+
+.navbar .navbar_action {
+    display: flex;
+    grid-area: action;
+    justify-content: end;
+    margin-right: 1rem;
+}
+
+.navbar .navbar_search {
+    background-color: #fff;
+    border: 1px solid;
+    border-radius: 5px;
+    display: flex;
+    grid-area: search;
+    margin: 0 20px;
+    padding: 5px 10px;
+}

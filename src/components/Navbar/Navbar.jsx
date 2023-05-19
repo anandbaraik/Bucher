@@ -29,8 +29,8 @@ const Navbar = () => {
         </NavLink>
       </div>
       <div className="navbar_search">
-        <input placeholder='Search books...' className="search"/>
-        <SearchOutlinedIcon className='secondary-color'/>
+      <SearchOutlinedIcon className='secondary-color'/>
+        <input type='search' placeholder='Search books...' className="search"/>
       </div>
     </div>
   )

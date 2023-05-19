@@ -10,7 +10,11 @@
   box-shadow: 0 0 0.225rem var(--shadow-color);
   padding-bottom: 0.4rem;
   padding-top: 0.3rem;
-
+  position: sticky;
+  top: 0;
+  z-index: 99;
+  inset: 0;
+  background-color: var(--white);
 }
 
 .secondary-color {

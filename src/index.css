@@ -24,6 +24,22 @@
   text-align: center;
 }
 
+.btn{
+  background-color: inherit;
+  border-radius: 0.4rem;
+  border: none;
+  cursor: pointer;
+  height: 2rem;
+  width: 8rem;
+  margin: 0.625rem;
+  text-decoration: none;
+  text-align: center;
+}
+
+.btn:hover{
+  filter: brightness(90%);
+}
+
 /* Default styles for mobile devices */
 body {
   margin: 0 auto;

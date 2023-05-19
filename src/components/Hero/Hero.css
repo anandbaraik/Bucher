@@ -1,0 +1,55 @@
+.home__hero{
+    background-image: url('../../assets/home_banner.jpg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    min-height: 15.875rem;
+    position: relative;
+}
+
+.home__hero-info{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    top: 75%;
+    bottom: 25%;
+    position: absolute;
+    left: 30%;
+    right: 30%;
+}
+
+.home__hero-cta {
+    background-color: var(--primary-color);
+    color: var(--white);
+    height: 3rem;
+    padding: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 0.9rem;
+}
+
+@media (min-width: 768px) {
+    .home__hero{
+        min-height: 21.875rem;
+    }
+    .home__hero-info{
+        top: 80%;
+        bottom: 15%;
+        left: 30%;
+        right: 30%;
+    }
+}
+
+@media (min-width: 1024px) {
+    .home__hero{
+        min-height: 22.875rem;
+    }
+    .home__hero-info{
+        top: 80%;
+        bottom: 15%;
+        left: 30%;
+        right: 30%;
+    }
+}

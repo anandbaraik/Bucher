@@ -1,23 +1,18 @@
 import { createContext, useContext, useState } from "react";
 import { useLocation, useNavigate } from "react-router";
-const AuthContext = createContext({
-  isLoggedIn: false,
-  toggleLoginStatus: () => {}
-});
+
+const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const navigate = useNavigate();
-  const location = useLocation();
-  const toggleLoginStatus = () => {
-    setIsLoggedIn(!isLoggedIn);
-    navigate(location?.state?.from?.pathname);
-  };
+    const [token, setToken] = useState(localStorage.getItem("token"));
+    const [user, setUser] = useState(localStorage.getItem("user"));
   return (
     <AuthContext.Provider
       value={{
-        isLoggedIn,
-        toggleLoginStatus
+        token,
+        setToken,
+        user,
+        setUser
       }}
     >
       {children}

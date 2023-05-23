@@ -1,51 +1,117 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import "./SignIn.css";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate, useLocation } from "react-router-dom";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
-const SignIn = () => {
-    const login = true;
-    const toggleLoginPassword = () => {
+import { useAuth } from '../../context/AuthContext';
+import axios from "axios";
 
+const SignIn = () => {
+
+    const {token, setUser, setToken} = useAuth();
+    const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+    const [error, setError] = useState(null);
+    const [signInCredential, setSignInCredential] = useState({
+        email: "",
+        password: ""
+    });
+
+    const navigate = useNavigate();
+    const location = useLocation();
+
+    const toggleLoginPassword = () => {
+        setIsPasswordVisible((isVisible) => !isVisible);
     }
+
+    useEffect(() => {
+        if (token) {
+          navigate("/profile");
+        }
+    }, [token, navigate]);
+
+    const signInHandler = async (e) => {
+        e.preventDefault();
+        try {
+            const {data:{encodedToken, foundUser}} = await axios.post(`/api/auth/login`, signInCredential);
+
+            //store token & user in the local storage
+            localStorage.setItem("token", encodedToken);
+            localStorage.setItem("user", JSON.stringify(foundUser));
+
+            setToken(encodedToken);
+            setUser(JSON.stringify(foundUser));
+
+            if (location?.state?.from?.pathname) {
+              navigate(location?.state?.from?.pathname);
+            } else {
+              navigate("/");
+            }
+
+        } catch (error) {
+            setError(error.response.statusText);
+        }
+
+        setSignInCredential({
+            email: "",
+            password: "",
+        });
+    }
+
+    const signInWithTestCredential = () => {
+        setSignInCredential({
+            email: "anandbaraik2014@gmail.com",
+            password: "anandbaraik2014"
+        });
+    }
+
   return (
     <div className='signin signin_container'>
         <h1 className="signin-heading text-center">
             Sign in
         </h1>
-        <label>
-            Email
-            <input
-                id='email'
-                type="email"
-                name='email'
-                className="signin_input"
-                placeholder="anand@live.com"
-                autoFocus={true}/>
-        </label>
-        <label>
-            Password
-            <input
-                type='password'
-                name='password'
-                className="signin_input"
-                placeholder="********"
-            />
-            <button className="signin__pwd-visibility-toggle-btn" onClick={() => toggleLoginPassword()}>
-                {login ? <VisibilityOffIcon /> : <VisibilityIcon />}
+        {error && <p className="auth-error text-center">User {error}</p>}
+        <form onSubmit={signInHandler} className="sign-in-form">
+            <label>
+                Email
+                <input
+                    id='email'
+                    type="email"
+                    name='email'
+                    className="signin_input"
+                    placeholder="anand@live.com"
+                    required
+                    value={signInCredential.email}
+                    autoFocus={true}
+                    onChange={(e) => setSignInCredential((prev) => ({...prev, email:e.target.value}))}/>
+            </label>
+            <label>
+                Password
+                <input
+                    type={!isPasswordVisible ? 'password' : 'text'}
+                    name='password'
+                    className="signin_input"
+                    placeholder="********"
+                    value={signInCredential.password}
+                    required
+                    onChange={(e) => setSignInCredential((prev) => ({...prev, password:e.target.value}))}
+                />
+                <button type='button' className="signin__pwd-visibility-toggle-btn" onClick={() => toggleLoginPassword()}>
+                    {!isPasswordVisible ? <VisibilityOffIcon /> : <VisibilityIcon />}
+                </button>
+            </label>
+            <label className="signin_remember cursor-pointer">
+                <input type="checkbox" />
+                Remember Me
+            </label>
+            <button type='submit' className="sign_btn signin_btn_user_cred">
+                Sign in
             </button>
-        </label>
-        <label className="signin_remember cursor-pointer">
-            <input type="checkbox" />
-            Remember Me
-        </label>
-        <button className="sign_btn signin_btn_user_cred">
-            Sign in
-        </button>
-        <button className="sign_btn signin_btn_test_cred">
-            Sign in with test credentials
-        </button>
+            <button type='button' className="sign_btn signin_btn_test_cred"
+                onClick={signInWithTestCredential}>
+                Sign in with test credentials
+            </button>
+        </form>
         <NavLink className="navlink" to="/signup">
             <button className="redirect_btn">
                 <h3>Create a new account</h3>

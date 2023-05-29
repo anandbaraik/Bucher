@@ -3,7 +3,7 @@
     width: 100%;
     padding: 1rem;
     bottom: 0;
-    position: fixed;
+    /* position: fixed; */
     display: flex;
     flex-direction: column;
     justify-content: space-evenly

@@ -15,6 +15,12 @@
   --secondary-color: #007bb5;
   --shadow-color: #b9b9b9;
   --danger-color: #ff4a4a;
+  --text-color: #1e1e1e;
+  --text-secondary: #2e2e2e;
+  --bright-blue: #7685ab;
+  --star-color: gold;
+  /* --deep-blue: #121932;
+  --medium-blue: #293657; */
 }
 
 .cursor-pointer {
@@ -23,6 +29,20 @@
 
 .text-center {
   text-align: center;
+}
+
+.img-fluid{
+  max-width: 100%;
+}
+
+.grid {
+  display: grid;
+  margin: 0;
+  width: 100%;
+}
+
+.grid-three-col {
+  grid-template-columns: repeat(2, 1fr);
 }
 
 .btn{
@@ -64,6 +84,21 @@ button {
   font-size: 0.65rem;
 }
 
+::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  background-color: var(--lynx-white);
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+  background-color: var(--lynx-white);
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--primary-color);
+}
+
 /* Styles for tablets (portrait) and up */
 @media (min-width: 768px) {
   body {
@@ -78,6 +113,9 @@ button {
   p,
   button {
     font-size: 0.9rem;
+  }
+  .grid-three-col {
+    grid-template-columns: repeat(3, 1fr);
   }
 }
 
@@ -95,5 +133,8 @@ button {
   p,
   button {
     font-size: 1.15rem;
+  }
+  .grid-three-col {
+    grid-template-columns: repeat(3, 1fr);
   }
 }

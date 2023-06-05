@@ -1,0 +1,27 @@
+.wishlist-page {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 5rem;
+    padding-top: 2rem;
+    gap: 2rem;
+  }
+
+  .wishlist-header {
+    font-size: 1.5rem;
+  }
+
+  .wishlist-empty {
+    color: var(--accent-color);
+    font-weight: 600;
+    font-size: 1.5rem;
+  }
+
+  .wishlist-container {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
+    justify-items: center;
+    grid-gap: 2rem;
+  }

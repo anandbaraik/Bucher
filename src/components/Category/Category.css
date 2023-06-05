@@ -1,0 +1,44 @@
+.category-card{
+    /* border: 1px solid var(--primary-color); */
+    border-radius: 0.25rem;
+    position: relative;
+}
+
+.category-img{
+    border-radius: 0.25rem;
+    height: 18rem;
+    object-fit: cover;
+    opacity: .7;
+    /* -webkit-transform: scale(.9); */
+    /* transform: scale(.9); */
+    width: 100%;
+}
+
+.category-title {
+    background-color: rgba(0,0,0,.35);
+    color: var(--white);
+    font-size: 1.2rem;
+    left: 50%;
+    position: absolute;
+    text-align: center;
+    top: 50%;
+    -webkit-transform: translate(-50%,-50%);
+    transform: translate(-50%,-50%);
+    width: 100%;
+    padding: 15px 0 16px;
+    line-height: 1.25;
+}
+
+/* Styles for tablets (portrait) and up */
+@media (min-width: 768px) {
+    .category-title {
+        font-size: 1.5rem;
+    }
+  }
+
+  /* Styles for laptops and up */
+  @media (min-width: 1024px) {
+    .category-title {
+        font-size: 2rem;
+    }
+  }

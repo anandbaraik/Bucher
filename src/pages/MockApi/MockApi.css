@@ -63,12 +63,12 @@
     border-radius: 5px;
     overflow-wrap: anywhere;
 }
-.title {
+/* .title {
     font-weight: 300;
     border-bottom: 2px solid rgb(24, 93, 153);
     width: fit-content;
     padding-block: 0.3rem;
-}
+} */
 textarea {
     width: 100%;
     border: 1px solid rgb(24, 93, 153);

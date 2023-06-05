@@ -1,0 +1,191 @@
+.cart_book_card_navlink {
+    text-decoration: none;
+    color: black;
+    display: flex;
+    justify-content: center;
+  }
+
+  .cart_book_card {
+    box-shadow: rgba(0,0,0,.16) 0px 3px 6px,rgba(0,0,0,.23) 0px 3px 6px;
+    border-radius: 5px;
+    display: flex;
+    max-height: 225px;
+    width: 90%;
+    margin: 0.5rem 0;
+    padding: 0.5rem 0;
+    position: relative;
+  }
+
+  .cart_book_card img {
+    height: 100%;
+    width: 50%;
+    object-fit: contain;
+  }
+
+  .cart_book_card .wishlist_icon {
+    margin: 0.5rem 0.5rem 0 0;
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    color: var(--danger-color);
+    scale: 0.8;
+  }
+
+  .cart_book_card .wishlist_icon:hover {
+    scale: 1.2;
+    color: var(--danger-color);
+  }
+
+  .cart_book_card .cart_book_card_content {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    justify-content: space-between;
+    padding: 1rem;
+    row-gap: 0.5rem;
+    text-align: left;
+  }
+
+  .cart_book_card .cart_book_card_content .cart_book_card_content_title {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+  }
+
+  .cart_book_card .cart_book_card_content .cart_book_card_content_price_wrapper {
+    display: flex;
+  }
+
+  .cart_book_card .cart_book_card_content .cart_book_card_content_price {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    column-gap: 1rem;
+    color: var(--discounted-price-color);
+    font-weight: bold;
+  }
+
+  .cart_book_card
+    .cart_book_card_content
+    .cart_book_card_content_price
+    p:nth-child(2) {
+    text-decoration: line-through;
+    color: var(--original-price-color);
+  }
+
+  .cart_book_card .cart_book_card_content button {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    background-color: var(--secondary-color);
+    border: none;
+    padding: 0.25rem 0.5rem;
+    text-transform: uppercase;
+  }
+
+  .cart_book_card .cart_book_card_content button:hover {
+    cursor: pointer;
+    background-color: white;
+    color: black;
+    outline: 1.5px solid var(--secondary-color);
+  }
+
+  .cart_book_card .cart_book_card_content .cart_book_card_button {
+    border-radius: 5px;
+    padding: 0.25rem 0;
+    margin: 0.25rem 0 0;
+  }
+
+  .cart_book_card
+    .cart_book_card_content
+    .cart_book_card_button
+    .cart_book_card_button_text
+    .cart_book_card_wishlist_qty {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .cart_book_card
+    .cart_book_card_content
+    .cart_book_card_qty_remove
+    .cart_book_card_qty_wrapper {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .cart_book_card
+    .cart_book_card_content
+    .cart_book_card_qty_remove
+    .cart_book_card_qty_wrapper
+    .cart_book_card_qty_remove_btn {
+    color: var(--primary-color);
+    display: flex;
+    align-items: center;
+  }
+
+  .cart_book_card
+    .cart_book_card_content
+    .cart_book_card_qty_remove
+    .cart_book_card_qty_wrapper
+    .cart_book_card_qty_remove_btn:hover {
+    color: var(--original-price-color);
+    scale: 1.2;
+  }
+
+  .cart_book_card
+    .cart_book_card_content
+    .cart_book_card_qty_remove
+    .cart_book_card_qty_wrapper
+    .cart_book_card_qty {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    column-gap: 0.5rem;
+  }
+
+  @media (min-width: 375px) {
+    .cart_book_card {
+      padding: 1rem 0;
+      min-width: 350px;
+      width: 75%;
+    }
+
+    .cart_book_card .wishlist_icon {
+      top: 0;
+      right: 0;
+      scale: 1;
+    }
+
+    .cart_book_card .cart_book_card_content .cart_book_card_content_price {
+      width: 50%;
+    }
+
+    .cart_book_card
+      .cart_book_card_content
+      .cart_book_card_qty_remove
+      .cart_book_card_qty_wrapper
+      .cart_book_card_qty {
+      width: 50%;
+      column-gap: 1rem;
+    }
+
+    .cart_book_card .cart_book_card_content button {
+      padding: 0.25rem 1rem;
+    }
+  }
+
+  @media (min-width: 768px) {
+    .cart_book_card {
+      min-width: 500px;
+    }
+
+    .cart_book_card img {
+      width: 70%;
+    }
+
+    .cart_book_card .cart_book_card_content {
+      row-gap: 5%;
+    }
+  }

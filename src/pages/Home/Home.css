@@ -1,0 +1,24 @@
+.category-container {
+    margin: 1rem
+}
+.category-header{
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+.category-body {
+    gap: 1rem;
+}
+
+/* Styles for tablets (portrait) and up */
+@media (min-width: 768px) {
+    .category-container {
+        margin: 1.5rem
+    }
+  }
+
+  /* Styles for laptops and up */
+  @media (min-width: 1024px) {
+    .category-container {
+        margin: 2rem
+    }
+  }

@@ -1,0 +1,23 @@
+.why-choose-us {
+    margin: 5rem 2rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+    place-items: center;
+    text-align: center;
+  }
+.title{
+    font-weight: bold;
+    width: 100%;
+}
+  .why-choose-us .service {
+    margin: 1rem 0;
+  }
+
+  .service .icon {
+    color: var(--primary-color);
+    font-size: 3.5rem;
+  }
+
+  .service .sub-title {
+    color: var(--text-secondary);
+  }

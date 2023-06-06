@@ -8,7 +8,6 @@ const FilterContext = createContext({
 
 const FilterProvider = ({ children }) => {
   const [state, dispatch] = useReducer(filterReducer, initialState);
-
   return (
     <FilterContext.Provider
       value={{

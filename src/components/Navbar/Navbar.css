@@ -133,6 +133,9 @@
 }
 
 @media (min-width: 1024px) {
+  .navbar {
+    z-index: 99;
+  }
   .navbar .navbar_action .wishlist,
   .navbar .navbar_action .cart,
   .navbar .navbar_action .user {

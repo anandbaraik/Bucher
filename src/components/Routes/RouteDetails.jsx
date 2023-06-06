@@ -10,6 +10,8 @@ import SignUp from "../../pages/SignUp/SignUp";
 import SignIn from "../../pages/SignIn/SignIn";
 import ErrorPage from '../../pages/ErrorPage/ErrorPage';
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
+import Address from '../../pages/Address/Address';
+import { Checkout } from '../../pages/Checkout/Checkout';
 const RouteDetails = () => {
   return (
     <Routes>
@@ -29,6 +31,17 @@ const RouteDetails = () => {
         <Route path="/profile" element={
           <PrivateRoute>
             <Profile/>
+          </PrivateRoute>
+        }/>
+
+        <Route path="/address" element={
+          <PrivateRoute>
+            <Address/>
+          </PrivateRoute>
+        }/>
+        <Route path="/checkout" element={
+          <PrivateRoute>
+            <Checkout/>
           </PrivateRoute>
         }/>
         <Route path="/signup" element={<SignUp/>}/>

@@ -8,6 +8,7 @@ import "./index.css";
 import App from "./App";
 
 import { makeServer } from "./server";
+import FilterProvider from "./context/FilterContext";
 
 // Call make Server
 makeServer();
@@ -17,7 +18,9 @@ ReactDOM.render(
     <Router>
       <AuthProvider>
         <DataProvider>
-        <App />
+          <FilterProvider>
+            <App />
+        </FilterProvider>
         </DataProvider>
       </AuthProvider>
     </Router>

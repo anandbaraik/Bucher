@@ -1,0 +1,56 @@
+/* adrr list */
+.address-list{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1rem;
+    padding: 2rem 4rem;
+    /* border: 0.1rem solid var(--primary-color); */
+    width: 40rem;
+}
+.add-new-address{
+    background-color: var(--primary-color);
+    border: none;
+    padding: 0.5rem;
+    cursor: pointer;
+}
+
+/* addr card */
+.address-card{
+    border: 0.1rem solid var(--primary-color);
+    padding: 0.5rem;
+}
+.addr_edit {
+    background-color: var(--primary-color);
+    border: none;
+}
+.addr_delete {
+    background-color: var(--danger-color);
+    border: none;
+}
+.choose-addr {
+    float: right;
+}
+
+/* addr form */
+.addr_input{
+    margin: 0.5rem 0;
+    padding: 0 0.5rem;
+    width: 100%;
+    height: 2rem;
+    border: 1px solid var(--primary-color);
+    border-radius: 0.3rem;
+    outline: none;
+}
+
+.save_btn {
+    color: var(--white);
+    background-color: var(--primary-color);
+    border: none;
+}
+
+.cancel_btn {
+    color: var(--white);
+    background-color: var(--danger-color);
+    border: none;
+}

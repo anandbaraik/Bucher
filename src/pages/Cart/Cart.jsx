@@ -29,10 +29,10 @@ const Cart = () => {
           </div>
           <div className="cart_block_price_details_wrapper">
             <div className="cart_block_price_details">
-              <div className="cart_block_price_details_heading">
-                <h2>Price Details</h2>
+              <div className="cart_block_price_details_heading text-center">
                 <h2>
-                  ({cart?.length} item{cart?.length > 1 && "s"})
+                    Price Details
+                    ({cart?.length} item{cart?.length > 1 && "s"})
                 </h2>
               </div>
               <hr />

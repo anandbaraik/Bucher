@@ -1,0 +1,37 @@
+.order-details-container{
+    box-shadow: 0 0 2px rgba(0,0,0,.3);
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    height: -moz-fit-content;
+    padding: 1rem;
+    width: 45%;
+}
+
+.flex-col{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.gap-8 {
+    gap: 0.5rem;
+}
+
+.flex-items-col {
+    display: flex;
+    flex-direction: column;
+}
+
+.flex-row{
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+}
+.place-order-btn{
+    background-color: var(--primary-color);
+    color: var(--white);
+    border: none;
+    border-radius: 0.2rem;
+    padding: 0.5rem;
+}

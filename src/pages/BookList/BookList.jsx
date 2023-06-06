@@ -6,21 +6,34 @@ import ProductCard from '../../components/ProductCard/ProductCard';
 import FilterSidebar from '../../components/FilterSidebar/FilterSidebar';
 import { getFilteredProducts } from "../../util/filterProducts";;
 const BookList = () => {
-  const { products } = useData();
+  const { loader, products } = useData();
   const { appliedFilters } = useFilter();
-  const filteredProducts = products;
+  const filteredProducts = getFilteredProducts(products, appliedFilters);
   return (
     <div className="product-section">
-      <FilterSidebar />
-      <div className="product-list">
-        {filteredProducts.length === 0 ? (
-          <h1>Product does not found...</h1>
+      {
+        loader ? (
+          <>
+            <FilterSidebar />
+            <div className="product-list">
+              <h1 className='m-auto'>Loading Products...</h1>
+            </div>
+          </>
         ) : (
-          filteredProducts.map((product) => (
-            <ProductCard product={product} key={product._id} />
-          ))
-        )}
-      </div>
+          <>
+          <FilterSidebar />
+          <div className="product-list">
+            {filteredProducts?.length === 0 ? (
+              <h1 className='m-auto'>No Products found...</h1>
+            ) : (
+              filteredProducts?.map((product) => (
+                <ProductCard product={product} key={product._id} />
+              ))
+            )}
+          </div>
+          </>
+        )
+      }
     </div>
   )
 }

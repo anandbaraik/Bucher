@@ -1,0 +1,11 @@
+.address-container{
+    display: flex;
+    flex-direction: column;
+    margin: 2rem auto;
+}
+.address-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 1rem auto;
+}

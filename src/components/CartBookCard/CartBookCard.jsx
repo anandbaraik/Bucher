@@ -11,7 +11,8 @@ import { useData } from "../../context/DataContext";
 import { useAuth } from "../../context/AuthContext";
 import { removeFromCart, updateQtyInCart } from "../../services/cartServices";
 import { addToWishlist, removeFromWishlist } from "../../services/wishlistServices";
-
+import AddOutlinedIcon from '@mui/icons-material/AddOutlined';
+import RemoveOutlinedIcon from '@mui/icons-material/RemoveOutlined';
 export const CartBookCard = ({ book }) => {
   const {_id:productId, id, title, author, description, bookType, inStock, genres, coverImg, offers, originalPrice, qty, discountPercent, discountPrice, totalRatings, totalStars, __v, createdAt, updatedAt} = book;
 
@@ -81,14 +82,14 @@ export const CartBookCard = ({ book }) => {
                         updateQtyInCartHandler(productId, "DECREMENT", qty)
                     }
                 >
-                  -
+                  <RemoveOutlinedIcon/>
                 </button>
                 <p>{qty}</p>
                 <button
                   disabled={btnDisabled}
                   onClick={() => updateQtyInCartHandler(productId, "INCREMENT")}
                 >
-                  +
+                  <AddOutlinedIcon/>
                 </button>
               </div>
               <div

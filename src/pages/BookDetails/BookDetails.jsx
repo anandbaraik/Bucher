@@ -18,6 +18,7 @@ import LocalShippingIcon from '@mui/icons-material/LocalShipping';
 import LocalOfferIcon from '@mui/icons-material/LocalOffer';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import EditIcon from '@mui/icons-material/Edit';
+import CategoryOutlinedIcon from '@mui/icons-material/CategoryOutlined';
 const BookDetails = () => {
 
   const {bookId:productId} = useParams();
@@ -100,6 +101,14 @@ const BookDetails = () => {
             </div>
           </div>
           <p className="product-detail-description">{description }</p>
+          <p className="product-geners">
+            {product?.genres.map((genre) => (
+              <span className="prouct-gener">
+                  <CategoryOutlinedIcon fontSize="small"/>
+                  {genre}
+              </span>
+            )) }
+          </p>
           <div className="product-detail-tag-msg">
             <span className="tag-msg">
               <LocalShippingIcon /> Fastest Delivery
@@ -116,6 +125,7 @@ const BookDetails = () => {
               <button
                 className="product-detail-add-to-cart-btn"
                 onClick={addToCartHandler}
+                disabled={btnDisabled}
               >
                 <ShoppingCartCheckoutOutlinedIcon className="icon" />Go To Cart
               </button>
@@ -144,6 +154,7 @@ const BookDetails = () => {
               <button
                 className="product-detail-add-to-whishlist-btn"
                 onClick={addToWishlistHandler}
+                disabled={btnDisabled}
               >
               <FavoriteOutlinedIcon color="error"/>  Remove from Wishlist
               </button>
@@ -151,6 +162,7 @@ const BookDetails = () => {
               <button
                 className="product-detail-add-to-whishlist-btn"
                 onClick={addToWishlistHandler}
+                disabled={btnDisabled}
               >
                <FavoriteBorderOutlinedIcon/> Add To Wishlist
               </button>

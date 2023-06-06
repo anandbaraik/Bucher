@@ -35,6 +35,10 @@
   max-width: 100%;
 }
 
+.m-auto {
+  margin: auto;
+}
+
 .grid {
   display: grid;
   margin: 0;

@@ -1,39 +1,23 @@
 import React, { useState } from "react";
 
 import "./FilterSidebar.css";
+import { useData } from "../../context/DataContext";
+import { TYPE } from "../../util/constants";
 import { useFilter } from "../../context/FilterContext";
-// import {
-//   CLEAR_FILTERS,
-//   FILTER_BY_CATEGORY,
-//   FILTER_BY_SECTION,
-//   SORT_BY_RATING,
-//   SORT_PRODUCTS,
-//   UPDATE_PRICE_RANGE,
-// } from "utils";
 
 const FilterSidebar = () => {
-  // const { state, dispatch } = useFilter();
-  // const { selectedSections, selectedCategory, sortByPrice } = state;
   const [showMobileFilters, setShowMobileFilters] = useState(false);
-  // const maxValue = state.products.reduce(
-  //   (acc, curr) => (Number(curr.price) > acc ? Number(curr.price) : acc),
-  //   0
-  // );
-  // // Action dispatcher functions
-  // const handleSortProducts = (sortingString) => {
-  //   dispatch({ type: SORT_PRODUCTS, payload: sortingString });
-  // };
-  // const handleSortByRating = (rating) => {
-  //   dispatch({ type: SORT_BY_RATING, payload: rating });
-  // };
+  const { categories} = useData();
+  const { appliedFilters, filterDispatch } = useFilter();
+  const ratings = [4, 3, 2, 1];
+  const handleFilter = (e, filterType) => {
+    console.log(e.target.value, filterType);
+    filterDispatch({ type: filterType, payload: e.target.value });
+  };
 
-  // const handleSectionToggle = (section) => {
-  //   dispatch({ type: FILTER_BY_SECTION, payload: section });
-  // };
-
-  // const handleCategoryFilter = (category) => {
-  //   dispatch({ type: FILTER_BY_CATEGORY, payload: category });
-  // };
+  const handlerClearFilters = () => {
+    filterDispatch({ type: TYPE.CLEAR_FILTERS });
+  };
 
   return (
     <>
@@ -53,7 +37,7 @@ const FilterSidebar = () => {
           )}
           <span
             className="filter-clear-button"
-            onClick={() => {}}
+            onClick={handlerClearFilters}
           >
             CLEAR
           </span>
@@ -67,9 +51,9 @@ const FilterSidebar = () => {
               type="radio"
               id="highToLow"
               name="priceSort"
-              value="highToLow"
-              // checked={sortByPrice === "highToLow"}
-              onChange={() => {}}
+              value="HIGH_TO_LOW"
+              checked={appliedFilters?.sortByPrice === "HIGH_TO_LOW"}
+              onChange={(e) => handleFilter(e, TYPE.SORT_BY_PRICE)}
             />
             <label htmlFor="highToLow">Price: High to Low</label>
           </div>
@@ -79,50 +63,29 @@ const FilterSidebar = () => {
               type="radio"
               id="lowToHigh"
               name="priceSort"
-              value="lowToHigh"
-              // checked={sortByPrice === "lowToHigh"}
-              onChange={() => {}}
+              value="LOW_TO_HIGH"
+              checked={appliedFilters?.sortByPrice === "LOW_TO_HIGH"}
+              onChange={(e) => handleFilter(e, TYPE.SORT_BY_PRICE)}
             />
             <label htmlFor="lowToHigh">Price: Low to High</label>
-          </div>
-          <div>
-            <input
-              type="radio"
-              id="aToz"
-              name="priceSort"
-              value="aToz"
-              // checked={sortByPrice === "aToz"}
-              onChange={() => {}}
-            />
-            <label htmlFor="aToz">Category: A to Z</label>
-          </div>
-          <div>
-            <input
-              type="radio"
-              id="zToa"
-              name="priceSort"
-              value="zToa"
-              // checked={sortByPrice === "zToa"}
-              onChange={() => {}}
-            />
-            <label htmlFor="zToa">Category: Z to A</label>
           </div>
         </div>
         <hr />
         {/*--------------------------------- Price Slider----------------------------------------- */}
         <div className="price-slider">
-          <span className="filter-heading">SLIDER</span>
+          <span className="filter-heading">Price</span>
           <input
             type="range"
-            min="0"
-            // max={maxValue}
-            // value={state.priceRange.max}
-            onChange={(e) => {}}
+            min="100"
+            max="1000"
+            step="50"
+            value={appliedFilters.filterByPriceRange}
+            onChange={(e) => handleFilter(e, TYPE.FILTER_BY_PRICE_RANGE)}
           />
           <div className="filter-slider-label">
-            <p className="text-secondary-color">0</p>
-            <p className="text-secondary-color">{Math.ceil(100 / 2)}</p>
-            <p className="text-secondary-color">{'100'}</p>
+            <p className="text-secondary-color">100</p>
+            <p className="text-secondary-color">{Math.ceil(1000 / 2)}</p>
+            <p className="text-secondary-color">{'1000'}</p>
           </div>
         </div>
 
@@ -130,177 +93,49 @@ const FilterSidebar = () => {
         {/*--------------------------------- Filter By Rating----------------------------------------- */}
         <div className="filter-by-rating">
           <span className="filter-heading">RATINGS</span>
-          <div>
-            <input
-              id="4stars"
-              type="checkbox"
-              name="4stars"
-              value="4stars"
-              // checked={state.sortByRating === "4stars"}
-              onChange={() => {}}
-            />
-            <label htmlFor="4stars">4 ⭐️ and above</label>
-          </div>
-          <div>
-            <input
-              id="3stars"
-              type="checkbox"
-              name="3stars"
-              value="3stars"
-              // checked={state.sortByRating === "3stars"}
-              onChange={() => {}}
-            />
-            <label htmlFor="3stars">3 ⭐️ and above</label>
-          </div>
-          <div>
-            <input
-              id="2stars"
-              type="checkbox"
-              name="2stars"
-              value="2stars"
-              // checked={state.sortByRating === "2stars"}
-              onChange={() => {}}
-            />
-            <label htmlFor="2stars">2 ⭐️ and above</label>
-          </div>
-          <div>
-            <input
-              id="1stars"
-              type="checkbox"
-              name="1star"
-              value="1star"
-              // checked={state.sortByRating === "1stars"}
-              onChange={() => {}}
-            />
-            <label htmlFor="1stars">1 ⭐️ and above</label>
-          </div>
-        </div>
-        <hr />
-        {/*--------------------------------- Sort By Section----------------------------------------- */}
-        <div className="filter-by-section">
-          <span className="filter-heading">SECTION</span>
-          <div>
-            <input
-              id="Womens"
-              type="checkbox"
-              name="Womens"
-              value="Womens"
-              // checked={selectedSections.includes("Womens")}
-              onChange={() => {}}
-            />
-            <label htmlFor="Womens"> Women's</label>
-          </div>
-          <div>
-            <input
-              type="checkbox"
-              id="Mens"
-              name="Mens"
-              value="Mens"
-              // checked={selectedSections.includes("Mens")}
-              onChange={() => {}}
-            />
-            <label htmlFor="Mens"> Men's</label>
-          </div>
-          <div>
-            <input
-              type="checkbox"
-              id="Kids"
-              name="Kids"
-              value="Kids"
-              // checked={selectedSections.includes("Kids")}
-              onChange={() => {}}
-            />
-            <label htmlFor="Kids"> Kid's</label>
-          </div>
+          {ratings.map((rating, index) => {
+            return (
+              <div key={index}>
+                <input
+                  id={`rating_${rating}`}
+                  type="radio"
+                  name="rating"
+                  value={rating}
+                  checked={rating === +appliedFilters.filterByRating}
+                  onChange={(e) => handleFilter(e, TYPE.FILTER_BY_RATING)}
+                />
+                <label htmlFor={`rating_${rating}`}>{rating} ⭐️ and above</label>
+              </div>
+            );
+          })}
         </div>
         <hr />
         {/*--------------------------------- Sort By Categories----------------------------------------- */}
         <div className="filter-by-categories">
           <span className="filter-heading">CATEGORIES</span>
-          <div>
-            <input
-              type="checkbox"
-              id="activeWear"
-              name="activeWear"
-              value="activeWear"
-              // checked={selectedCategory.includes("Active Wear")}
-              onChange={() => {}}
-            />
-            <label htmlFor="activeWear">Active Wear</label>
-          </div>
-          <div>
-            <input
-              type="checkbox"
-              id="dresses"
-              name="dresses"
-              value="dresses"
-              // checked={selectedCategory.includes("Dresses")}
-              onChange={() => {}}
-            />
-            <label htmlFor="dresses">Dresses</label>
-          </div>
-          <div>
-            <input
-              type="checkbox"
-              id="tops"
-              name="tops"
-              value="tops"
-              // checked={selectedCategory.includes("Tops")}
-              onChange={() => {}}
-            />
-            <label htmlFor="tops">Tops</label>
-          </div>
-          <div>
-            <input
-              type="checkbox"
-              id="officeWear"
-              name="officeWear"
-              value="officeWear"
-              // checked={selectedCategory.includes("Office Wear")}
-              onChange={() => {}}
-            />
-            <label htmlFor="officeWear">Office Wear</label>
-          </div>
-          <div>
-            <input
-              type="checkbox"
-              id="casual"
-              name="casual"
-              value="casual"
-              // checked={selectedCategory.includes("Casual")}
-              onChange={() => {}}
-            />
-            <label htmlFor="casual">Casual</label>
-          </div>
-          <div>
-            <input
-              type="checkbox"
-              id="freestyle"
-              name="freestyle"
-              value="freestyle"
-              // checked={selectedCategory.includes("Freestyle")}
-              onChange={() => {}}
-            />
-            <label htmlFor="freestyle">Freestyle</label>
-          </div>
-          <div>
-            <input
-              type="checkbox"
-              id="formal"
-              name="formal"
-              value="formal"
-              // checked={selectedCategory.includes("Formal")}
-              onChange={() => {}}
-            />
-            <label htmlFor="formal">Men's Formal</label>
-          </div>
+
+          {categories.map(({ _id, categoryName, categoryTitle }) => {
+            return (
+              <div key={_id}>
+                <input
+                  type="checkbox"
+                  name={categoryName}
+                  id={categoryName}
+                  value={categoryName}
+                  checked={appliedFilters?.filterByCategories?.includes(categoryName)}
+                  onChange={(e) => handleFilter(e, TYPE.FILTER_BY_CATEGORIES)}
+                />
+                <label htmlFor={categoryName}>{categoryName}</label>
+              </div>
+            );
+          })}
         </div>
       </section>
       {/*--------------------------------- Mobile view filters----------------------------------------- */}
 
-      <div class="mobile-filters">
+      <div className="mobile-filters">
         <div
-          class="mobile-filter-header"
+          className="mobile-filter-header"
           onClick={() => setShowMobileFilters(!showMobileFilters)}
         >
           <img
@@ -318,7 +153,7 @@ const FilterSidebar = () => {
           />
           <button
             className="filter-clear-button"
-            onClick={() => {}}
+            onClick={handlerClearFilters}
           >
             CLEAR
           </button>

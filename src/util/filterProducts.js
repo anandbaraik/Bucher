@@ -1,35 +1,35 @@
 const filterBySearch = (products, appliedFilters) =>
-  appliedFilters.filterBySearch.length > 0
-    ? products.filter((item) =>
-        item.name
-          .toLowerCase()
-          .includes(appliedFilters.filterBySearch.toLowerCase())
+  appliedFilters?.filterBySearch?.length > 0
+    ? products?.filter((book) =>
+        book?.title
+          ?.toLowerCase()
+          ?.includes(appliedFilters?.filterBySearch?.toLowerCase())
       )
     : products;
 
 const filterByPriceRange = (products, appliedFilters) =>
-  appliedFilters.filterByPriceRange.length > 0
-    ? products.filter(({ price }) => price < +appliedFilters.filterByPriceRange)
+  appliedFilters?.filterByPriceRange?.length > 0
+    ? products?.filter(({ originalPrice, discountPrice }) => (originalPrice - discountPrice) < +appliedFilters?.filterByPriceRange)
     : products;
 
 const filterByRating = (products, appliedFilters) =>
-  appliedFilters.filterByRating.length > 0
-    ? products.filter(({ rating }) => rating > +appliedFilters.filterByRating)
+  appliedFilters?.filterByRating?.length > 0
+    ? products?.filter(({ totalStars }) => totalStars > +appliedFilters?.filterByRating)
     : products;
 
 const filterByCategories = (products, appliedFilters) =>
-  appliedFilters.filterByCategories.length > 0
-    ? products.filter(({ category }) =>
-        appliedFilters.filterByCategories.some((filter) => filter === category)
+  appliedFilters?.filterByCategories?.length > 0
+    ? products?.filter(({ genres }) =>
+        appliedFilters?.filterByCategories?.some((category) => genres.includes(category))
       )
     : products;
 
 const sortByPrice = (products, appliedFilters) =>
-  !appliedFilters.sortByPrice
+  !appliedFilters?.sortByPrice
     ? products
-    : appliedFilters.sortByPrice === "LOW_TO_HIGH"
-    ? [...products].sort((a, b) => a.price - b.price)
-    : [...products].sort((a, b) => b.price - a.price);
+    : appliedFilters?.sortByPrice === "LOW_TO_HIGH"
+    ? [...products]?.sort((a, b) => a?.originalPrice - a?.discountPrice -(b?.originalPrice - b?.discountPrice))
+    : [...products]?.sort((a, b) => b?.originalPrice - b?.discountPrice - (a?.originalPrice - a?.discountPrice));
 
 export const getFilteredProducts = (products, appliedFilters) => {
   const filterFunctions = [
@@ -40,7 +40,7 @@ export const getFilteredProducts = (products, appliedFilters) => {
     sortByPrice,
   ];
 
-  return filterFunctions.reduce(
+  return filterFunctions?.reduce(
     (acc, func) => func(acc, appliedFilters),
     products
   );

@@ -26,7 +26,7 @@ const Home = () => {
             (categories?.length > 0) && (
                 <div className='category-container'>
                     <h1 className='category-header text-center'>
-                        Browse Genres 🎗️
+                        Featured Book Categories 🎗️
                     </h1>
                     <div className="category-body grid grid-three-col category-grid">
                         {

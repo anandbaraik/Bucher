@@ -54,7 +54,7 @@ const OrderDetails = ({addressSelected}) => {
       }
 
       const options = {
-        key: "rzp_test_b2n4tgTnQgUZga",
+        key: "rzp_test_VWcnggDMIuM9bg",
         amount: (totalPrice - discountedPrice) * 100,
         currency: "INR",
         name: "Bucher",

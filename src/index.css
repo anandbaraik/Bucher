@@ -55,7 +55,7 @@
   border: none;
   cursor: pointer;
   height: 2rem;
-  width: 8rem;
+  width: fit-content;
   margin: 0.625rem;
   text-decoration: none;
   text-align: center;

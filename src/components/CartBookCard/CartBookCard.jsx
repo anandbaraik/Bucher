@@ -1,6 +1,4 @@
 import "./CartBookCard.css";
-import { NavLink } from "react-router-dom";
-
 import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
 import FavoriteOutlinedIcon from '@mui/icons-material/FavoriteOutlined';
 import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
@@ -14,70 +12,75 @@ import { addToWishlist, removeFromWishlist } from "../../services/wishlistServic
 import AddOutlinedIcon from '@mui/icons-material/AddOutlined';
 import RemoveOutlinedIcon from '@mui/icons-material/RemoveOutlined';
 export const CartBookCard = ({ book }) => {
-  const {_id:productId, id, title, author, description, bookType, inStock, genres, coverImg, offers, originalPrice, qty, discountPercent, discountPrice, totalRatings, totalStars, __v, createdAt, updatedAt} = book;
+  const {_id:productId, title, author, coverImg, originalPrice, qty, discountPrice} = book;
 
   const { wishlist, dataDispatch } = useData();
   const { token } = useAuth();
-  const [btnDisabled, setBtnDisabled] = useState(false);
+  const [isBtnDisabled, setIsBtnDisabled] = useState(false);
   const isInWishlilst = isProductInWishlist(wishlist, productId);
 
   const removeFromCartHandler = (productId) => {
-    removeFromCart(dataDispatch, productId, token, setBtnDisabled);
+    removeFromCart(dataDispatch, productId, token, setIsBtnDisabled);
   };
 
   const addToWishlistHandler = (product) => {
-    addToWishlist(dataDispatch, product, token, setBtnDisabled);
+    addToWishlist(dataDispatch, product, token, setIsBtnDisabled);
   };
 
   const removeFromWishlistHandler = () => {
-    removeFromWishlist(dataDispatch, productId, token, setBtnDisabled);
+    removeFromWishlist(dataDispatch, productId, token, setIsBtnDisabled);
   }
 
   const updateQtyInCartHandler = (productId, actionType, quantity) => {
     if (quantity === 1) {
-      removeFromCart(dataDispatch, productId, token, setBtnDisabled);
+      removeFromCart(dataDispatch, productId, token, setIsBtnDisabled);
     } else {
       updateQtyInCart(
         dataDispatch,
         productId,
         token,
         actionType,
-        setBtnDisabled
+        setIsBtnDisabled
       );
     }
   };
 
   return (
-    <a data-href="!#" className="cart_book_card_navlink">
-      <li key={productId} className="cart_book_card">
+    <a data-href="!#" className="book-card-navlink">
+      <li key={productId} className="book-card">
         <img src={coverImg} alt={title} />
         <div onClick={(e) => e.preventDefault()}>
           {isInWishlilst ? (
+            <button disabled={isBtnDisabled}>
             <FavoriteOutlinedIcon
-              className="wishlist_icon"
+              className="wishlist-icon cursor-pointer text-danger"
               onClick={removeFromWishlistHandler}
             />
+            </button>
           ) : (
+            <button disabled={isBtnDisabled}>
             <FavoriteBorderOutlinedIcon
-              className="wishlist_icon"
+              className="wishlist-icon cursor-pointer"
               onClick={() => addToWishlistHandler(book)}
             />
+            </button>
           )}
         </div>
-        <div className="cart_book_card_content">
-          <h3 className="cart_book_card_content_title">{title}</h3>
-          <p className="cart_book_card_content_author">{author}</p>
-          <div className="cart_book_card_content_price_wrapper">
-            <div className="cart_book_card_content_price">
+        <div className="book-card-body">
+          <h3 className="book-card-body-title">{title}</h3>
+          <p className="book-card-body-author">{author}</p>
+          <div className="book-card-body-price-container">
+            <div className="book-card-body-price">
               <h2>₹ {originalPrice - discountPrice}</h2>
               <p>₹ {originalPrice}</p>
             </div>
           </div>
-          <div className="cart_book_card_qty_remove">
-            <div className="cart_book_card_qty_wrapper">
-              <div className="cart_book_card_qty">
+          <div className="book-card-qty-container">
+            <div className="book-card-qty-body">
+              <div className="book-card_qty">
                 <button
-                  disabled={qty === 1 || btnDisabled}
+                  className="cursor-pointer btn"
+                  disabled={qty === 1 || isBtnDisabled}
                     onClick={() =>
                         updateQtyInCartHandler(productId, "DECREMENT", qty)
                     }
@@ -86,19 +89,20 @@ export const CartBookCard = ({ book }) => {
                 </button>
                 <p>{qty}</p>
                 <button
-                  disabled={btnDisabled}
+                  className="cursor-pointer btn"
+                  disabled={isBtnDisabled}
                   onClick={() => updateQtyInCartHandler(productId, "INCREMENT")}
                 >
                   <AddOutlinedIcon/>
                 </button>
               </div>
-              <div
-                className="cart_book_card_qty_remove_btn"
+              <button
+                className="book-card-remove-btn cursor-pointer btn"
                 onClick={() => removeFromCartHandler(productId)}
-                disabled={btnDisabled}
+                disabled={isBtnDisabled}
               >
                 <DeleteOutlinedIcon />
-              </div>
+              </button>
             </div>
           </div>
         </div>

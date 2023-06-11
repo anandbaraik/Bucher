@@ -1,5 +1,4 @@
 .category-card{
-    /* border: 1px solid var(--primary-color); */
     border-radius: 0.25rem;
     position: relative;
 }
@@ -9,8 +8,6 @@
     height: 18rem;
     object-fit: cover;
     opacity: .7;
-    /* -webkit-transform: scale(.9); */
-    /* transform: scale(.9); */
     width: 100%;
 }
 

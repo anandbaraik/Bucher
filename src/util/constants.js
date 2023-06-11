@@ -25,7 +25,7 @@ export const TYPE = {
 
 export const TOAST_CONFIG = {
     position: "top-right",
-    autoClose: 1000,
+    autoClose: 700,
     hideProgressBar: false,
     closeOnClick: true,
     pauseOnHover: true,

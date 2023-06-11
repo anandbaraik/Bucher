@@ -6,10 +6,10 @@ export const addToWishlist = async (
   dataDispatch,
   product,
   token,
-  setBtnDisabled
+  setIsBtnDisabled
 ) => {
   try {
-    setBtnDisabled(true);
+    setIsBtnDisabled(true);
 
     const {data:{wishlist}} = await axios.post("/api/user/wishlist", {product},
       {
@@ -19,7 +19,7 @@ export const addToWishlist = async (
       }
     );
 
-    setBtnDisabled(false);
+    setIsBtnDisabled(false);
 
     toast.success("Added To Wishlist", TOAST_CONFIG);
 
@@ -37,10 +37,10 @@ export const removeFromWishlist = async (
   dataDispatch,
   productId,
   token,
-  setBtnDisabled
+  setIsBtnDisabled
 ) => {
   try {
-    setBtnDisabled(true);
+    setIsBtnDisabled(true);
 
     const {data:{wishlist}} = await axios.delete(`/api/user/wishlist/${productId}`, {
       headers: {
@@ -48,7 +48,7 @@ export const removeFromWishlist = async (
       },
     });
 
-    setBtnDisabled(false);
+    setIsBtnDisabled(false);
 
     toast.warn("Removed From Wishlist", TOAST_CONFIG);
 

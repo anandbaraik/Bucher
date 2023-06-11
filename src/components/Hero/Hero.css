@@ -44,7 +44,7 @@
 
 @media (min-width: 1024px) {
     .home__hero{
-        min-height: 22.875rem;
+        min-height: calc(80vh - 4.6875rem);
     }
     .home__hero-info{
         top: 80%;

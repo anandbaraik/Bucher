@@ -6,6 +6,8 @@ import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import { useAuth } from '../../context/AuthContext';
 import axios from "axios";
+import { TOAST_CONFIG } from "../../util/constants";
+import { toast } from "react-toastify";
 const SignUp = () => {
 
     const navigate = useNavigate();
@@ -16,7 +18,6 @@ const SignUp = () => {
         confirmPassword: false
     });
 
-    const [isUserExist, setIsUserExist] = useState(false);
     const [signupInfo, setSignupInfo] = useState({
         firstName: "",
         lastName: "",
@@ -45,9 +46,11 @@ const SignUp = () => {
 
             navigate("/");
 
+            toast.success(`Logged in`, TOAST_CONFIG);
+
         } catch (error) {
             if (error.response.status === 422) {
-                setIsUserExist(true);
+                toast.error("User already exsists!", TOAST_CONFIG);
             }
         }
 
@@ -65,7 +68,6 @@ const SignUp = () => {
         <h1 className="signup-heading text-center">
             Sign up
         </h1>
-        {isUserExist && <p className="auth-error text-center">User already exsists!</p>}
         <form onSubmit={signUpHandler} className="sign-up-form">
             <label>
                 First name
@@ -117,7 +119,7 @@ const SignUp = () => {
                     onChange={(e) => setSignupInfo((prev) => ({...prev, password:e.target.value}))}
                 />
                 <button type='button' className="signup__pwd-visibility-toggle-btn" onClick={() => setIsVisible((prev) => ({...prev, password:!isVisible.password}))}>
-                    {!isVisible.password ? <VisibilityOffIcon /> : <VisibilityIcon />}
+                    {!isVisible.password ? <VisibilityOffIcon className='cursor-pointer'/> : <VisibilityIcon className='cursor-pointer'/>}
                 </button>
             </label>
             <label>
@@ -132,7 +134,7 @@ const SignUp = () => {
                     onChange={(e) => setSignupInfo((prev) => ({...prev, confirmPassword:e.target.value}))}
                 />
                 <button type='button' className="signup__pwd-visibility-toggle-btn" onClick={() => setIsVisible((prev) => ({...prev, confirmPassword:!isVisible.confirmPassword}))}>
-                    {!isVisible.confirmPassword ? <VisibilityOffIcon /> : <VisibilityIcon />}
+                    {!isVisible.confirmPassword ? <VisibilityOffIcon className='cursor-pointer'/> : <VisibilityIcon className='cursor-pointer'/>}
                 </button>
             </label>
             {

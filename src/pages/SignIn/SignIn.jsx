@@ -5,13 +5,14 @@ import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import { useAuth } from '../../context/AuthContext';
+import { TOAST_CONFIG } from "../../util/constants";
+import { toast } from "react-toastify";
 import axios from "axios";
 
 const SignIn = () => {
 
     const {token, setUser, setToken} = useAuth();
     const [isPasswordVisible, setIsPasswordVisible] = useState(false);
-    const [error, setError] = useState(null);
     const [signInCredential, setSignInCredential] = useState({
         email: "",
         password: ""
@@ -48,8 +49,10 @@ const SignIn = () => {
               navigate("/");
             }
 
+            toast.success(`Logged in`, TOAST_CONFIG);
+
         } catch (error) {
-            setError(error.response.statusText);
+            toast.error(`User ${error.response.statusText}`, TOAST_CONFIG);
         }
 
         setSignInCredential({
@@ -70,7 +73,6 @@ const SignIn = () => {
         <h1 className="signin-heading text-center">
             Sign in
         </h1>
-        {error && <p className="auth-error text-center">User {error}</p>}
         <form onSubmit={signInHandler} className="sign-in-form">
             <label>
                 Email
@@ -97,7 +99,7 @@ const SignIn = () => {
                     onChange={(e) => setSignInCredential((prev) => ({...prev, password:e.target.value}))}
                 />
                 <button type='button' className="signin__pwd-visibility-toggle-btn" onClick={() => toggleLoginPassword()}>
-                    {!isPasswordVisible ? <VisibilityOffIcon /> : <VisibilityIcon />}
+                    {!isPasswordVisible ? <VisibilityOffIcon className='cursor-pointer'/> : <VisibilityIcon className='cursor-pointer'/>}
                 </button>
             </label>
             <label className="signin_remember cursor-pointer">
@@ -109,7 +111,7 @@ const SignIn = () => {
             </button>
             <button type='button' className="sign_btn signin_btn_test_cred"
                 onClick={signInWithTestCredential}>
-                Sign in with test credentials
+                Set guest credentials
             </button>
         </form>
         <NavLink className="navlink" to="/signup">

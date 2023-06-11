@@ -1,6 +1,6 @@
 import React from "react";
 import "./Address.css"
-const AddressCard = ({address, isAddressPage, addressSelected, addressSelectHandler, addressDeleteHandler, setEditingAddress, setIsEditing}) => {
+const AddressCard = ({address, isAddressPage, selectedAddress, addressSelectHandler, addressDeleteHandler, setEditableAddress, setIsEditing}) => {
   const { id, name, phone, city, state, pin, addressText } = address;
   return (
     <div className="address-card">
@@ -9,7 +9,7 @@ const AddressCard = ({address, isAddressPage, addressSelected, addressSelectHand
           type="radio"
           id={id}
           value={id}
-          checked={addressSelected?.id === id}
+          checked={selectedAddress?.id === id}
           onChange={addressSelectHandler}
           className="choose-addr"
         />
@@ -31,7 +31,7 @@ const AddressCard = ({address, isAddressPage, addressSelected, addressSelectHand
             <button
                 className="btn addr_edit"
               onClick={() => {
-                setEditingAddress(address);
+                setEditableAddress(address);
                 setIsEditing(true);
               }}
             >

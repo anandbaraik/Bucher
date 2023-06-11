@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./Address.css"
-const AddressForm = ({setFormDisplay, onFormSubmit, onFormEdit, setIsEditing, editingForm, editingAddress}) => {
+const AddressForm = ({setIsFormDisplayed, onFormSubmit, onFormEdit, setIsEditing, isEditingForm, editableAddress}) => {
   const [newAddress, setNewAddress] = useState({
     name: "",
     phone: "",
@@ -11,10 +11,10 @@ const AddressForm = ({setFormDisplay, onFormSubmit, onFormEdit, setIsEditing, ed
   });
 
   useEffect(() => {
-    if (editingAddress) {
-      setNewAddress(editingAddress);
+    if (editableAddress) {
+      setNewAddress(editableAddress);
     }
-  }, [editingAddress]);
+  }, [editableAddress]);
 
   const inputHandler = (e, inputName) => {
     setNewAddress((prev) => ({
@@ -26,19 +26,19 @@ const AddressForm = ({setFormDisplay, onFormSubmit, onFormEdit, setIsEditing, ed
   const addressFormSubmitHandler = (e) => {
     e.preventDefault();
 
-    if (editingForm) {
+    if (isEditingForm) {
       onFormEdit(newAddress);
       setIsEditing(false);
     } else {
       onFormSubmit(newAddress);
-      setFormDisplay(false);
+      setIsFormDisplayed(false);
     }
   };
 
   return (
     <div className="address-form-container">
-      <h4>{editingForm ? "Edit Address" : "Add New Address"}</h4>
-      <form onSubmit={addressFormSubmitHandler} className="address-form">
+      <h4>{isEditingForm ? "Edit Address" : "Add New Address"}</h4>
+      <form onSubmit={addressFormSubmitHandler}>
         <div>
           <input
             type="text"
@@ -105,20 +105,20 @@ const AddressForm = ({setFormDisplay, onFormSubmit, onFormEdit, setIsEditing, ed
             required
           />
         </div>
-        <div className="address-form-btn-group">
-          <button className="btn save_btn">SAVE</button>
+          <button className="btn save_btn">
+            Save
+          </button>
 
-          {!editingForm && (
-            <button className="btn cancel_btn" type="button" onClick={() => setFormDisplay(false)}>
-              CANCEL
+          {!isEditingForm && (
+            <button className="btn cancel_btn" type="button" onClick={() => setIsFormDisplayed(false)}>
+              Cancel
             </button>
           )}
-          {editingForm && (
+          {isEditingForm && (
             <button className="btn cancel_btn" type="button" onClick={() => setIsEditing(false)}>
-              CANCEL
+              Cancel
             </button>
           )}
-        </div>
       </form>
     </div>
   );

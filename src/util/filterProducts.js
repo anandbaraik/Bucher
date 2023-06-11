@@ -1,37 +1,37 @@
-const filterBySearch = (products, appliedFilters) =>
-  appliedFilters?.filterBySearch?.length > 0
+const filterBySearch = (products, filtersApplied) =>
+  filtersApplied?.filterBySearch?.length > 0
     ? products?.filter((book) =>
         book?.title
           ?.toLowerCase()
-          ?.includes(appliedFilters?.filterBySearch?.toLowerCase())
+          ?.includes(filtersApplied?.filterBySearch?.toLowerCase())
       )
     : products;
 
-const filterByPriceRange = (products, appliedFilters) =>
-  appliedFilters?.filterByPriceRange?.length > 0
-    ? products?.filter(({ originalPrice, discountPrice }) => (originalPrice - discountPrice) < +appliedFilters?.filterByPriceRange)
+const filterByPriceRange = (products, filtersApplied) =>
+  filtersApplied?.filterByPriceRange?.length > 0
+    ? products?.filter(({ originalPrice, discountPrice }) => (originalPrice - discountPrice) < +filtersApplied?.filterByPriceRange)
     : products;
 
-const filterByRating = (products, appliedFilters) =>
-  appliedFilters?.filterByRating?.length > 0
-    ? products?.filter(({ totalStars }) => totalStars > +appliedFilters?.filterByRating)
+const filterByRating = (products, filtersApplied) =>
+  filtersApplied?.filterByRating?.length > 0
+    ? products?.filter(({ totalStars }) => totalStars > +filtersApplied?.filterByRating)
     : products;
 
-const filterByCategories = (products, appliedFilters) =>
-  appliedFilters?.filterByCategories?.length > 0
+const filterByCategories = (products, filtersApplied) =>
+  filtersApplied?.filterByCategories?.length > 0
     ? products?.filter(({ genres }) =>
-        appliedFilters?.filterByCategories?.some((category) => genres.includes(category))
+        filtersApplied?.filterByCategories?.some((category) => genres.includes(category))
       )
     : products;
 
-const sortByPrice = (products, appliedFilters) =>
-  !appliedFilters?.sortByPrice
+const sortByPrice = (products, filtersApplied) =>
+  !filtersApplied?.sortByPrice
     ? products
-    : appliedFilters?.sortByPrice === "LOW_TO_HIGH"
+    : filtersApplied?.sortByPrice === "LOW_TO_HIGH"
     ? [...products]?.sort((a, b) => a?.originalPrice - a?.discountPrice -(b?.originalPrice - b?.discountPrice))
     : [...products]?.sort((a, b) => b?.originalPrice - b?.discountPrice - (a?.originalPrice - a?.discountPrice));
 
-export const getFilteredProducts = (products, appliedFilters) => {
+export const getFilteredProducts = (products, filtersApplied) => {
   const filterFunctions = [
     filterBySearch,
     filterByPriceRange,
@@ -41,7 +41,7 @@ export const getFilteredProducts = (products, appliedFilters) => {
   ];
 
   return filterFunctions?.reduce(
-    (acc, func) => func(acc, appliedFilters),
+    (acc, func) => func(acc, filtersApplied),
     products
   );
 };

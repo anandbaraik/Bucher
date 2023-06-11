@@ -19,11 +19,13 @@ import LocalOfferIcon from '@mui/icons-material/LocalOffer';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import EditIcon from '@mui/icons-material/Edit';
 import CategoryOutlinedIcon from '@mui/icons-material/CategoryOutlined';
+import SearchingProductImg from "../../assets/searching.svg"
+import EmptyResult from '../../components/EmptyResult/EmptyResult';
 const BookDetails = () => {
 
   const {bookId:productId} = useParams();
   const [product, setProduct] = useState(null);
-  const [btnDisabled, setBtnDisabled] = useState(false);
+  const [isBtnDisabled, setIsBtnDisabled] = useState(false);
   const { token } = useAuth();
   const { dataDispatch, cart, wishlist, setLoader } = useData();
   const navigate = useNavigate();
@@ -39,7 +41,7 @@ const BookDetails = () => {
       if (isInCart) {
         navigate("/cart");
       } else {
-        addToCart(dataDispatch, product, token, setBtnDisabled);
+        addToCart(dataDispatch, product, token, setIsBtnDisabled);
       }
     } else {
       navigate("/signin");
@@ -49,9 +51,9 @@ const BookDetails = () => {
   const addToWishlistHandler = () => {
     if (token) {
       if (isInWishlilst) {
-        removeFromWishlist(dataDispatch, productId, token, setBtnDisabled);
+        removeFromWishlist(dataDispatch, productId, token, setIsBtnDisabled);
       } else {
-        addToWishlist(dataDispatch, product, token, setBtnDisabled);
+        addToWishlist(dataDispatch, product, token, setIsBtnDisabled);
       }
     } else {
       navigate("/signin");
@@ -61,7 +63,10 @@ const BookDetails = () => {
   if (!product) {
     return (
       <div className="product-detail-page">
-        <h2 className="text-center">Loading...</h2>
+        <EmptyResult
+          img={SearchingProductImg}
+          heading={'Loading Product...'}
+        />
       </div>
     );
   }
@@ -103,7 +108,7 @@ const BookDetails = () => {
           <p className="product-detail-description">{description }</p>
           <p className="product-geners">
             {product?.genres.map((genre) => (
-              <span className="prouct-gener">
+              <span className="prouct-gener" key={genre}>
                   <CategoryOutlinedIcon fontSize="small"/>
                   {genre}
               </span>
@@ -125,7 +130,7 @@ const BookDetails = () => {
               <button
                 className="product-detail-add-to-cart-btn"
                 onClick={addToCartHandler}
-                disabled={btnDisabled}
+                disabled={isBtnDisabled}
               >
                 <ShoppingCartCheckoutOutlinedIcon className="icon" />Go To Cart
               </button>
@@ -154,7 +159,7 @@ const BookDetails = () => {
               <button
                 className="product-detail-add-to-whishlist-btn"
                 onClick={addToWishlistHandler}
-                disabled={btnDisabled}
+                disabled={isBtnDisabled}
               >
               <FavoriteOutlinedIcon color="error"/>  Remove from Wishlist
               </button>
@@ -162,7 +167,7 @@ const BookDetails = () => {
               <button
                 className="product-detail-add-to-whishlist-btn"
                 onClick={addToWishlistHandler}
-                disabled={btnDisabled}
+                disabled={isBtnDisabled}
               >
                <FavoriteBorderOutlinedIcon/> Add To Wishlist
               </button>

@@ -8,7 +8,7 @@ import { useFilter } from "../../context/FilterContext";
 const FilterSidebar = () => {
   const [showMobileFilters, setShowMobileFilters] = useState(false);
   const { categories} = useData();
-  const { appliedFilters, filterDispatch } = useFilter();
+  const { filtersApplied, filterDispatch } = useFilter();
   const ratings = [4, 3, 2, 1];
   const handleFilter = (e, filterType) => {
     console.log(e.target.value, filterType);
@@ -43,35 +43,6 @@ const FilterSidebar = () => {
           </span>
         </div>
         <hr />
-        {/*--------------------------------- Sort By filters----------------------------------------- */}
-        <div className="filter-sort-by">
-          <span className="filter-heading">SORT BY</span>
-          <div>
-            <input
-              type="radio"
-              id="highToLow"
-              name="priceSort"
-              value="HIGH_TO_LOW"
-              checked={appliedFilters?.sortByPrice === "HIGH_TO_LOW"}
-              onChange={(e) => handleFilter(e, TYPE.SORT_BY_PRICE)}
-            />
-            <label htmlFor="highToLow">Price: High to Low</label>
-          </div>
-
-          <div>
-            <input
-              type="radio"
-              id="lowToHigh"
-              name="priceSort"
-              value="LOW_TO_HIGH"
-              checked={appliedFilters?.sortByPrice === "LOW_TO_HIGH"}
-              onChange={(e) => handleFilter(e, TYPE.SORT_BY_PRICE)}
-            />
-            <label htmlFor="lowToHigh">Price: Low to High</label>
-          </div>
-        </div>
-        <hr />
-        {/*--------------------------------- Price Slider----------------------------------------- */}
         <div className="price-slider">
           <span className="filter-heading">Price</span>
           <input
@@ -79,7 +50,7 @@ const FilterSidebar = () => {
             min="100"
             max="1000"
             step="50"
-            value={appliedFilters.filterByPriceRange}
+            value={filtersApplied.filterByPriceRange}
             onChange={(e) => handleFilter(e, TYPE.FILTER_BY_PRICE_RANGE)}
           />
           <div className="filter-slider-label">
@@ -88,9 +59,7 @@ const FilterSidebar = () => {
             <p className="text-secondary-color">{'1000'}</p>
           </div>
         </div>
-
         <hr />
-        {/*--------------------------------- Filter By Rating----------------------------------------- */}
         <div className="filter-by-rating">
           <span className="filter-heading">RATINGS</span>
           {ratings.map((rating, index) => {
@@ -101,7 +70,7 @@ const FilterSidebar = () => {
                   type="radio"
                   name="rating"
                   value={rating}
-                  checked={rating === +appliedFilters.filterByRating}
+                  checked={rating === +filtersApplied.filterByRating}
                   onChange={(e) => handleFilter(e, TYPE.FILTER_BY_RATING)}
                 />
                 <label htmlFor={`rating_${rating}`}>{rating} ⭐️ and above</label>
@@ -110,7 +79,6 @@ const FilterSidebar = () => {
           })}
         </div>
         <hr />
-        {/*--------------------------------- Sort By Categories----------------------------------------- */}
         <div className="filter-by-categories">
           <span className="filter-heading">CATEGORIES</span>
 
@@ -122,7 +90,7 @@ const FilterSidebar = () => {
                   name={categoryName}
                   id={categoryName}
                   value={categoryName}
-                  checked={appliedFilters?.filterByCategories?.includes(categoryName)}
+                  checked={filtersApplied?.filterByCategories?.includes(categoryName)}
                   onChange={(e) => handleFilter(e, TYPE.FILTER_BY_CATEGORIES)}
                 />
                 <label htmlFor={categoryName}>{categoryName}</label>
@@ -130,9 +98,34 @@ const FilterSidebar = () => {
             );
           })}
         </div>
-      </section>
-      {/*--------------------------------- Mobile view filters----------------------------------------- */}
+        <hr />
+        <div className="filter-sort-by">
+          <span className="filter-heading">SORT BY</span>
+          <div>
+            <input
+              type="radio"
+              id="highToLow"
+              name="priceSort"
+              value="HIGH_TO_LOW"
+              checked={filtersApplied?.sortByPrice === "HIGH_TO_LOW"}
+              onChange={(e) => handleFilter(e, TYPE.SORT_BY_PRICE)}
+            />
+            <label htmlFor="highToLow">Price: High to Low</label>
+          </div>
 
+          <div>
+            <input
+              type="radio"
+              id="lowToHigh"
+              name="priceSort"
+              value="LOW_TO_HIGH"
+              checked={filtersApplied?.sortByPrice === "LOW_TO_HIGH"}
+              onChange={(e) => handleFilter(e, TYPE.SORT_BY_PRICE)}
+            />
+            <label htmlFor="lowToHigh">Price: Low to High</label>
+          </div>
+        </div>
+      </section>
       <div className="mobile-filters">
         <div
           className="mobile-filter-header"
@@ -140,16 +133,16 @@ const FilterSidebar = () => {
         >
           <img
             className="svg-icon"
-            src="https://res.cloudinary.com/dptfwcnro/image/upload/v1684394768/E-comm%20ATTIREX/icons/filter-icon-512x430-exhzryxa_eoyxtk.png"
-            alt=""
+            src="https://github.com/anandbaraik/Bucher/assets/31516195/b5b26409-dc5d-4b50-8a27-54f1f0a007b6"
+            alt="open filter"
           />
           FILTERS
         </div>
         <div>
           <img
             className="svg-icon"
-            src="https://res.cloudinary.com/dptfwcnro/image/upload/v1684394755/E-comm%20ATTIREX/icons/edit-clear-all-symbolic-icon-256x256-ivqmmjo2_j7vmgl.png"
-            alt=""
+            src="https://github.com/anandbaraik/Bucher/assets/31516195/0124ef5a-5688-453b-b88b-0912ad063c46"
+            alt="clear"
           />
           <button
             className="filter-clear-button"

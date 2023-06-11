@@ -6,6 +6,12 @@
   padding: 0;
 }
 
+body{
+  overflow-x: hidden;
+  width: 100%;
+  max-width: 100%;
+}
+
 :root {
   --primary-color: #0e9aeb;
   --black: #1f1d1d;
@@ -29,6 +35,10 @@
 
 .text-center {
   text-align: center;
+}
+
+.text-danger {
+  color: var(--danger-color);
 }
 
 .img-fluid{

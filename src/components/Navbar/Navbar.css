@@ -21,6 +21,10 @@
   color: var(--secondary-color);
 }
 
+.search-icon {
+  border-left: 0.1rem solid var(--secondary-color);
+}
+
 .navbar .navbar_heading {
   grid-area: heading;
   text-align: start;
@@ -134,8 +138,11 @@
 
 @media (min-width: 1024px) {
   .navbar {
+    min-height: unset;
+    height: 4.6875rem;
     z-index: 99;
   }
+
   .navbar .navbar_action .wishlist,
   .navbar .navbar_action .cart,
   .navbar .navbar_action .user {

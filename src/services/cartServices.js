@@ -5,10 +5,10 @@ export const addToCart = async (
   dataDispatch,
   product,
   token,
-  setBtnDisabled
+  setIsBtnDisabled
 ) => {
   try {
-    setBtnDisabled(true);
+    setIsBtnDisabled(true);
 
     const {data:{cart}} = await axios.post("/api/user/cart",{product},
       {
@@ -18,7 +18,7 @@ export const addToCart = async (
       }
     );
 
-    setBtnDisabled(false);
+    setIsBtnDisabled(false);
 
     toast.success("Added To Cart", TOAST_CONFIG);
 
@@ -33,11 +33,11 @@ export const removeFromCart = async (
   dataDispatch,
   productId,
   token,
-  setBtnDisabled,
+  setIsBtnDisabled,
   isClearing
 ) => {
   try {
-    setBtnDisabled(true);
+    setIsBtnDisabled(true);
 
     const {data:{cart}} = await axios.delete(`/api/user/cart/${productId}`, {
       headers: {
@@ -45,7 +45,7 @@ export const removeFromCart = async (
       }
     });
 
-    setBtnDisabled(false);
+    setIsBtnDisabled(false);
 
     if (!isClearing) {
       toast.warn("Removed From Cart", TOAST_CONFIG);
@@ -63,10 +63,10 @@ export const updateQtyInCart = async (
   productId,
   token,
   actionType,
-  setBtnDisabled
+  setIsBtnDisabled
 ) => {
   try {
-    setBtnDisabled(true);
+    setIsBtnDisabled(true);
 
     const {data:{cart}} = await axios.post(`/api/user/cart/${productId}`, {
         action: {
@@ -80,12 +80,18 @@ export const updateQtyInCart = async (
       }
     );
 
-    setBtnDisabled(false);
+    setIsBtnDisabled(false);
 
     dataDispatch({
       type: TYPE.UPDATE_QTY_IN_CART,
       payload: cart
     });
+
+    if(actionType === "INCREMENT") {
+      toast.info("Quantity incremented", TOAST_CONFIG);
+    } else {
+      toast.info("Quantity decremented", TOAST_CONFIG);
+    }
   } catch (error) {
     console.error("updateQtyInCart : Error while updating book qty in cart", error);
   }

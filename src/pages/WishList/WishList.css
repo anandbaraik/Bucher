@@ -3,18 +3,11 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 5rem;
     padding-top: 2rem;
     gap: 2rem;
   }
 
   .wishlist-header {
-    font-size: 1.5rem;
-  }
-
-  .wishlist-empty {
-    color: var(--accent-color);
-    font-weight: 600;
     font-size: 1.5rem;
   }
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import "./Profile.css";
 import { useAuth } from '../../context/AuthContext';
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useData } from "../../context/DataContext";
 import { useFilter } from "../../context/FilterContext";
 import { logoutUser } from "../../services/authServices";
@@ -25,7 +25,7 @@ const Profile = () => {
             <div className="account-details-header">
               <h3>User Profile</h3>
               <Link to="/address">
-                <button className="manage_addr">Manage Addresses</button>
+                <button className="manage_addr btn">Manage Addresses</button>
               </Link>
             </div>
             <div className="account-info">

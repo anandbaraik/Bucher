@@ -8,7 +8,7 @@ import { useData } from "../../context/DataContext";
 export const Checkout = () => {
     const { cart } = useData();
     const navigate = useNavigate();
-    const [addressSelected, setAddressSelected] = useState(null);
+    const [selectedAddress, setSelectedAddress] = useState(null);
     useEffect(() => {
         if (cart.length === 0) {
           navigate("/books");
@@ -18,11 +18,15 @@ export const Checkout = () => {
     <div className="checkout-wrapper">
     <h1 className="text-center heading mb-2">Checkout</h1>
     <div className="checkout-container">
-      <AddressList
-        setAddressSelected={setAddressSelected}
-        addressSelected={addressSelected}
-      />
-      <OrderDetails addressSelected={addressSelected} />
+     <div className='flex-col-50'>
+        <AddressList
+            setSelectedAddress={setSelectedAddress}
+            selectedAddress={selectedAddress}
+          />
+     </div>
+     <div className='flex-col-50'>
+        <OrderDetails selectedAddress={selectedAddress} />
+      </div>
     </div>
   </div>
   )

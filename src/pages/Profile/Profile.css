@@ -1,5 +1,6 @@
 .account-page {
     padding: 1rem;
+    width: 100%;
   }
 .manage_addr {
   background-color: var(--primary-color);
@@ -22,20 +23,24 @@
     gap: 2rem;
     padding: 1rem;
     border: 0.2rem solid var(--primary-color);
-    width: 30rem;
+    width: 100%;
     margin: auto;
   }
 
   .account-details {
     font-family: "Roboto", sans-serif;
+    display: flex;
+    justify-content: space-around;
+    flex-direction: column;
   }
 
   .account-details-header {
     margin-bottom: 2rem;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-evenly;
     align-items: center;
   }
+
   .account-info {
     display: flex;
     flex-direction: column;
@@ -43,15 +48,31 @@
     font-size: 1.3rem;
   }
 
-  .addresses_btn {
-    padding: 4px 8px;
+  .manage_addr {
+    padding: 4px 10px;
     font-size: 1rem;
   }
 
   .account > button {
     align-self: center;
-    padding: 4px 8px;
+    padding: 4px 10px;
     font-size: 1rem;
     transition: all 0.1s linear;
     background-color: var(--primary-color);
+    color: var(--white);
   }
+
+
+  /* Styles for tablets (portrait) and up */
+@media (min-width: 768px) {
+  .account {
+    width: 50%;
+  }
+}
+
+/* Styles for laptops and up */
+@media (min-width: 1024px) {
+  .account {
+    width: 50%;
+  }
+}

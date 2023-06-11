@@ -1,0 +1,52 @@
+.empty-result-container{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin:  auto;
+    gap: 1rem;
+    margin-top: 2.5rem;
+}
+
+.empty-result-container > h1 {
+    font-size: 1.5rem;
+    text-align: center;
+}
+
+.empty-result-container > p {
+    text-align: center;
+    font-size: 1rem;
+    font-weight: 450;
+}
+
+.redirect-btn{
+    color: var(--white);
+    background-color: var(--primary-color);
+    border: none;
+    padding: 0.5rem 1rem;
+    color: var(--white);
+    height: auto;
+}
+
+.empty-img{
+    width: 50%;
+    max-width: 100%;
+    object-fit: contain;
+}
+
+/* Styles for tablets (portrait) and up */
+@media (min-width: 768px) {
+    .empty-img{
+        width: 15vw;
+        object-fit: contain;
+    }
+  }
+
+  /* Styles for laptops and up */
+  @media (min-width: 1024px) {
+    .empty-img{
+        width: 20vw;
+        object-fit: contain;
+    }
+  }

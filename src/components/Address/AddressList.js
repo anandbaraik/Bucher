@@ -6,14 +6,14 @@ import { toast } from "react-toastify";
 import AddressForm from "./AddressForm";
 import AddressCard from "./AddressCard";
 import "./Address.css"
-const AddressList = ({isAddressPage, addressSelected, setAddressSelected}) => {
-  const [formDisplay, setFormDisplay] = useState(false);
+const AddressList = ({isAddressPage, selectedAddress, setSelectedAddress}) => {
+  const [isFormDisplayed, setIsFormDisplayed] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
-  const [editingAddress, setEditingAddress] = useState(null);
+  const [editableAddress, setEditableAddress] = useState(null);
   const { addresses, dataDispatch } = useData();
 
   const addressSelectHandler = (e) => {
-    setAddressSelected(addresses.find(({ id }) => id === e.target.value));
+    setSelectedAddress(addresses.find(({ id }) => id === e.target.value));
   };
 
   const newAddressFormSubmitHandler = (address) => {
@@ -26,18 +26,18 @@ const AddressList = ({isAddressPage, addressSelected, setAddressSelected}) => {
 
   const addressDeleteHandler = (addressId) => {
     dataDispatch({ type: TYPE.DELETE_ADDRESS, payload: addressId });
-    toast.error("Deleted Address", TOAST_CONFIG);
+    toast.error("Address Deleted", TOAST_CONFIG);
   };
 
   const addressEditHandler = (address) => {
     dataDispatch({ type: TYPE.EDIT_ADDRESS, payload: address });
-    toast.success("Updated Address", TOAST_CONFIG);
+    toast.success("Address Updated", TOAST_CONFIG);
   };
 
   return (
     <div className="address-list">
       {addresses.length > 0 && !isAddressPage && (
-        <h3>Choose a delivery Address</h3>
+        <h3>Choose a delivery address</h3>
       )}
       {!isEditing &&
         addresses.map((address) => {
@@ -46,9 +46,9 @@ const AddressList = ({isAddressPage, addressSelected, setAddressSelected}) => {
               key={address.id}
               address={address}
               isAddressPage={isAddressPage}
-              addressSelected={addressSelected}
+              selectedAddress={selectedAddress}
               addressSelectHandler={addressSelectHandler}
-              setEditingAddress={setEditingAddress}
+              setEditableAddress={setEditableAddress}
               setIsEditing={setIsEditing}
               addressDeleteHandler={addressDeleteHandler}
             />
@@ -58,21 +58,21 @@ const AddressList = ({isAddressPage, addressSelected, setAddressSelected}) => {
         <AddressForm
           onFormEdit={addressEditHandler}
           setIsEditing={setIsEditing}
-          editingAddress={editingAddress}
-          editingForm
+          editableAddress={editableAddress}
+          isEditingForm
         />
       )}
-      {!formDisplay && !isEditing && (
+      {!isFormDisplayed && !isEditing && (
         <button
           className="add-new-address"
-          onClick={() => setFormDisplay(true)}
+          onClick={() => setIsFormDisplayed(true)}
         >
           Add New Address
         </button>
       )}
-      {formDisplay && (
+      {isFormDisplayed && (
         <AddressForm
-          setFormDisplay={setFormDisplay}
+          setIsFormDisplayed={setIsFormDisplayed}
           onFormSubmit={newAddressFormSubmitHandler}
         />
       )}

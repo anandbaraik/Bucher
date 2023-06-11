@@ -14,23 +14,28 @@ import { useNavigate } from "react-router-dom";
 
 const Navbar = () => {
   const { wishlist, cart } = useData();
-  const { appliedFilters, filterDispatch } = useFilter();
+  const { filtersApplied, filterDispatch } = useFilter();
   const navigate = useNavigate();
   const [search, setSearch] = useState("");
 
   useEffect(() => {
-    setSearch(appliedFilters?.filterBySearch);
-  }, [appliedFilters]);
+    setSearch(filtersApplied?.filterBySearch);
+  }, [filtersApplied]);
 
   const searchInputChangeHandler = (e) => {
     setSearch(e.target.value);
   };
 
-  const submitSearch = (e) => {
+  const keyPressSearchHandler = (e) => {
     if(e.which === 13) {
       filterDispatch({ type: TYPE.FILTER_BY_SEARCH, payload: search });
       navigate("/books");
     }
+  }
+
+  const submitSearchHandler = () => {
+    filterDispatch({ type: TYPE.FILTER_BY_SEARCH, payload: search });
+    navigate("/books");
   }
 
   return (
@@ -62,11 +67,12 @@ const Navbar = () => {
         </NavLink>
       </div>
       <div className="navbar_search">
-      <SearchOutlinedIcon className='secondary-color'/>
         <input type='text' placeholder='Search books...' className="search"
           value={search}
           onChange={searchInputChangeHandler}
-          onKeyPress={submitSearch}/>
+          onKeyPress={keyPressSearchHandler}/>
+          <SearchOutlinedIcon className='secondary-color cursor-pointer search-icon'
+            onClick={submitSearchHandler}/>
       </div>
     </div>
   )

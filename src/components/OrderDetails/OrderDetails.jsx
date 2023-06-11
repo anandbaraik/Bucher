@@ -7,22 +7,21 @@ import { useNavigate } from "react-router-dom";
 import { TYPE, TOAST_CONFIG } from "../../util/constants";
 import { useFilter } from "../../context/FilterContext";
 import { removeFromCart } from "../../services/cartServices";
-import { removeFromWishlist } from "../../services/wishlistServices";
 import { getTotalDiscount, getTotalPrice } from '../../util/productsUtil';
-const OrderDetails = ({addressSelected}) => {
+const OrderDetails = ({selectedAddress}) => {
     const { user, token } = useAuth();
     const { cart, dataDispatch } = useData();
     const { filterDispatch } = useFilter();
     const navigate = useNavigate();
     const discountedPrice = getTotalDiscount(cart);
     const totalPrice = getTotalPrice(cart);
-  const placeOrderHandler = () => {
-    if (!addressSelected) {
-      toast.warn("Select an address to proceed");
-    } else {
-      displayRazorpay();
-    }
-  };
+    const placeOrderHandler = () => {
+      if (!selectedAddress) {
+        toast.warn("Please select an address.", TOAST_CONFIG);
+      } else {
+        initializeRazorpay();
+      }
+    };
 
   const loadScript = async (url) => {
     return new Promise((resolve) => {
@@ -41,28 +40,28 @@ const OrderDetails = ({addressSelected}) => {
     });
   };
 
-  const displayRazorpay = async () => {
+  const initializeRazorpay = async () => {
 
-    if (addressSelected) {
+    if (selectedAddress) {
       const res = await loadScript(
         "https://checkout.razorpay.com/v1/checkout.js"
       );
 
       if (!res) {
-        toast.error("Razorpay SDK failed to load");
+        toast.error("Razorpay SDK failed to load", TOAST_CONFIG);
         return;
       }
 
       const options = {
-        key: "rzp_test_VWcnggDMIuM9bg",
+        key: process.env.REACT_APP_RAZORPAY_API_KEY,
         amount: (totalPrice - discountedPrice) * 100,
         currency: "INR",
         name: "Bucher",
         description: "Thank you for shopping with us",
         handler: function (response) {
-          toast.success("Order Placed", TOAST_CONFIG);
-          clearAll();
           navigate("/");
+          toast.success("Order Placed", TOAST_CONFIG);
+          clearAllState();
         },
         prefill: {
           name: `${JSON.parse(user)['firstName']}`,
@@ -78,7 +77,7 @@ const OrderDetails = ({addressSelected}) => {
     }
   };
 
-  const clearAll = () => {
+  const clearAllState = () => {
     dataDispatch({ type: TYPE.CLEAR_CART });
     filterDispatch({ type: TYPE.CLEAR_FILTERS });
     for (const item of cart) {

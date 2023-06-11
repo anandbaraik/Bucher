@@ -2,7 +2,7 @@ import { createContext, useContext, useReducer } from "react";
 import { initialState, filterReducer } from "../reducer/FilterReducer";
 
 const FilterContext = createContext({
-    appliedFilters: {},
+    filtersApplied: {},
     filterDispatch: () => {}
 });
 
@@ -11,7 +11,7 @@ const FilterProvider = ({ children }) => {
   return (
     <FilterContext.Provider
       value={{
-        appliedFilters: state,
+        filtersApplied: state,
         filterDispatch: dispatch
     }}
     >

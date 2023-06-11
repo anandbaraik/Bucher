@@ -4,53 +4,60 @@ import { useData } from "../../context/DataContext";
 import { NavLink } from 'react-router-dom';
 import { getTotalDiscount, getTotalPrice } from '../../util/productsUtil';
 import { CartBookCard } from '../../components/CartBookCard/CartBookCard';
+import EmptyCartImg from "../../assets/shopping-cart.png"
+import EmptyResult from '../../components/EmptyResult/EmptyResult';
 const Cart = () => {
   const { cart } = useData();
   const totalDiscount = getTotalDiscount(cart);
   const totalPrice = getTotalPrice(cart);
   return (
-    <div className="cart_page">
-      <h1 className="cart_heading text-center">
-        Cart {cart?.length }
+    <div className="cart-page">
+      <h1 className="cart-heading text-center">
+        Cart ({cart?.length })
       </h1>
       {
       cart?.length === 0 ? (
-        <div className="cart_empty text-center">
-          <h2>Oops! Your cart is empty! </h2>
-        </div>
+        <EmptyResult
+          img={EmptyCartImg}
+          heading={'Your Cart is Empty!'}
+          subheading={'Go ahead and explore exclusive products!'}
+          button={{
+            url: '/books',
+            text: 'Shop now'
+          }}/>
       ) : (
-        <div className="cart_block">
-          <div className="cart_block_items">
+        <div className="cart-block">
+          <div className="cart-block-items">
             <ul>
               {cart?.map((book) => (
                 <CartBookCard book={book} key={book._id} />
               ))}
             </ul>
           </div>
-          <div className="cart_block_price_details_wrapper">
-            <div className="cart_block_price_details">
-              <div className="cart_block_price_details_heading text-center">
+          <div className="cart-block-price-details-wrapper">
+            <div className="cart-block-price-details">
+              <div className="cart-block-price-details-heading text-center">
                 <h2>
                     Price Details
                     ({cart?.length} item{cart?.length > 1 && "s"})
                 </h2>
               </div>
               <hr />
-              <div className="cart_block_price_details_prices">
+              <div className="cart-block-price-details-prices">
                 <div>
                   <h3>Total Price</h3>
-                  <h3 className="cart_block_rupee">{totalPrice}</h3>
+                  <h3 className="cart-block-rupee">{totalPrice}</h3>
                 </div>
                 <div>
                   <h3>Discount</h3>
-                  <h3 className="cart_block_rupee">- {totalDiscount}</h3>
+                  <h3 className="cart-block-rupee">- {totalDiscount}</h3>
                 </div>
               </div>
               <hr />
-              <div className="cart_block_price_details_final">
+              <div className="cart-block-price-details-final">
                 <div>
                   <h2>Subtotal</h2>
-                  <h2 className="cart_block_rupee">
+                  <h2 className="cart-block-rupee">
                     {totalPrice - totalDiscount}
                   </h2>
                 </div>

@@ -4,29 +4,37 @@
     flex-direction: column;
     justify-content: center;
     gap: 1rem;
-    padding: 2rem 4rem;
-    /* border: 0.1rem solid var(--primary-color); */
-    width: 40rem;
+    padding: 2rem 1rem;
+    width: 100%;
 }
 .add-new-address{
     background-color: var(--primary-color);
     border: none;
     padding: 0.5rem;
     cursor: pointer;
+    padding: 0.6rem 1rem;
+    color: var(--white);
 }
 
 /* addr card */
 .address-card{
     border: 0.1rem solid var(--primary-color);
     padding: 0.5rem;
+    width: 100%;
 }
 .addr_edit {
     background-color: var(--primary-color);
     border: none;
+    padding: 0.5rem 1rem;
+    color: var(--white);
+    height: auto;
 }
 .addr_delete {
     background-color: var(--danger-color);
     border: none;
+    padding: 0.5rem 1rem;
+    color: var(--white);
+    height: auto;
 }
 .choose-addr {
     float: right;
@@ -47,10 +55,32 @@
     color: var(--white);
     background-color: var(--primary-color);
     border: none;
+    padding: 0.5rem 1rem;
+    color: var(--white);
+    height: auto;
 }
 
 .cancel_btn {
     color: var(--white);
     background-color: var(--danger-color);
     border: none;
+    padding: 0.5rem 1rem;
+    color: var(--white);
+    height: auto;
+}
+
+/* Styles for tablets (portrait) and up */
+@media (min-width: 768px) {
+    .address-wrapper {
+        width: 100%;
+        margin: auto;
+    }
+}
+
+  /* Styles for laptops and up */
+@media (min-width: 1024px) {
+    .address-wrapper {
+        width: 100%;
+        margin: auto;
+    }
 }

@@ -16,10 +16,10 @@ import { isProductInCart, isProductInWishlist } from "../../util/productsUtil";
 const ProductCard = ({ product }) => {
   const navigate = useNavigate();
   const location = useLocation();
-  const {_id:productId, author, title, description, inStock, coverImg, originalPrice, discountPrice, totalStars} = product;
+  const {_id:productId, author, title, inStock, coverImg, originalPrice, discountPrice, totalStars} = product;
   const { token } = useAuth();
   const { dataDispatch, cart, wishlist } = useData();
-  const [btnDisabled, setBtnDisabled] = useState(false);
+  const [isBtnDisabled, setIsBtnDisabled] = useState(false);
 
   const isInCart = isProductInCart(cart, productId);
   const isInWishlilst = isProductInWishlist(wishlist, productId);
@@ -30,7 +30,7 @@ const ProductCard = ({ product }) => {
       if (isInCart) {
         navigate("/cart");
       } else {
-        addToCart(dataDispatch, product, token, setBtnDisabled);
+        addToCart(dataDispatch, product, token, setIsBtnDisabled);
       }
     } else {
       navigate("/signin", { state: { from: location } });
@@ -41,9 +41,9 @@ const ProductCard = ({ product }) => {
     e.stopPropagation();
     if (token) {
       if (isInWishlilst) {
-        removeFromWishlist(dataDispatch, productId, token, setBtnDisabled);
+        removeFromWishlist(dataDispatch, productId, token, setIsBtnDisabled);
       } else {
-        addToWishlist(dataDispatch, product, token, setBtnDisabled);
+        addToWishlist(dataDispatch, product, token, setIsBtnDisabled);
       }
     } else {
       navigate("/signin", { state: { from: location } });
@@ -59,7 +59,7 @@ const ProductCard = ({ product }) => {
         <button
           className={`whishlist-heart ${isInWishlilst ? "favorite" : ""}`}
           onClick={addToWishlistHandler}
-          disabled={btnDisabled}
+          disabled={isBtnDisabled}
         >
           {isInWishlilst ? (
             <FavoriteOutlinedIcon color="error" />
@@ -87,7 +87,7 @@ const ProductCard = ({ product }) => {
               <button
                 className="add-to-cart-btn"
                 onClick={addToCartHandler}
-                disabled={btnDisabled}
+                disabled={isBtnDisabled}
               >
                 <ShoppingCartCheckoutOutlinedIcon className="icon" />
                 Go To Cart
@@ -101,7 +101,7 @@ const ProductCard = ({ product }) => {
                   </button>
                  ) : (
                   <button className="add-to-cart-btn" onClick={addToCartHandler}
-                    disabled={btnDisabled}>
+                    disabled={isBtnDisabled}>
                     <AddShoppingCartOutlinedIcon className="icon" />
                     Add To Cart
                   </button>

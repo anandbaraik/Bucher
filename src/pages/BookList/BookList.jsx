@@ -4,11 +4,14 @@ import {useData} from "../../context/DataContext";
 import { useFilter } from "../../context/FilterContext";
 import ProductCard from '../../components/ProductCard/ProductCard';
 import FilterSidebar from '../../components/FilterSidebar/FilterSidebar';
-import { getFilteredProducts } from "../../util/filterProducts";;
+import { getFilteredProducts } from "../../util/filterProducts";
+import ProductNotFoundImg from "../../assets/product_not_found.png"
+import SearchingProductImg from "../../assets/searching.svg"
+import EmptyResult from '../../components/EmptyResult/EmptyResult';
 const BookList = () => {
   const { loader, products } = useData();
-  const { appliedFilters } = useFilter();
-  const filteredProducts = getFilteredProducts(products, appliedFilters);
+  const { filtersApplied } = useFilter();
+  const filteredProducts = getFilteredProducts(products, filtersApplied);
   return (
     <div className="product-section">
       {
@@ -16,7 +19,10 @@ const BookList = () => {
           <>
             <FilterSidebar />
             <div className="product-list">
-              <h1 className='m-auto'>Loading Products...</h1>
+              <EmptyResult
+                img={SearchingProductImg}
+                heading={'Loading Products...'}
+              />
             </div>
           </>
         ) : (
@@ -24,7 +30,10 @@ const BookList = () => {
           <FilterSidebar />
           <div className="product-list">
             {filteredProducts?.length === 0 ? (
-              <h1 className='m-auto'>No Products found...</h1>
+              <EmptyResult
+                img={ProductNotFoundImg}
+                heading={'No Products found...'}
+              />
             ) : (
               filteredProducts?.map((product) => (
                 <ProductCard product={product} key={product._id} />

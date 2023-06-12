@@ -9,10 +9,11 @@ An ecommerce website to buy books online.
 ## How to install and run locally ?
 
 ```
-$ git clone https://github.com/anandbaraik/Bucher.git
-$ cd Bucher
-$ npm install
-$ npm start
+- git clone https://github.com/anandbaraik/Bucher.git
+- cd Bucher
+- create .env file on root of your project and copy env variable from envexample and set required credentials to run app
+- npm install
+- npm start
 ```
 
 ## Features

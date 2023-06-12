@@ -12,6 +12,7 @@ import ErrorPage from '../../pages/ErrorPage/ErrorPage';
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
 import Address from '../../pages/Address/Address';
 import { Checkout } from '../../pages/Checkout/Checkout';
+import OrderHistory from '../OrderHistory/OrderHistory';
 const RouteDetails = () => {
   return (
     <Routes>
@@ -42,6 +43,11 @@ const RouteDetails = () => {
         <Route path="/checkout" element={
           <PrivateRoute>
             <Checkout/>
+          </PrivateRoute>
+        }/>
+        <Route path="/orders" element={
+          <PrivateRoute>
+            <OrderHistory/>
           </PrivateRoute>
         }/>
         <Route path="/signup" element={<SignUp/>}/>

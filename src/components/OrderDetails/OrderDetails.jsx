@@ -59,8 +59,7 @@ const OrderDetails = ({selectedAddress}) => {
         name: "Bucher",
         description: "Thank you for shopping with us",
         handler: function (response) {
-          navigate("/");
-          toast.success("Order Placed", TOAST_CONFIG);
+          navigate("/orders");
           clearAllState();
         },
         prefill: {

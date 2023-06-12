@@ -1,0 +1,11 @@
+.order-history{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+}
+
+.order-history > h1 {
+    color: var(--primary-color);
+}
